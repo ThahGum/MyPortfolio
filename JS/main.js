@@ -6,7 +6,7 @@ const navMenu = document.getElementById('nav-menu'),
 /* Menu show */
 if(navToggle){
     navToggle.addEventListener('click', () =>{
-        navMenu.classList.add('show-menu')
+        navMenu.classList.add('show-menu') /*validate if constant exists*/
     })
 }
 
@@ -27,18 +27,10 @@ const linkAction = () =>{
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-// /*=============== CHANGE BACKGROUND HEADER ===============*/
-// const shadowHeader = () =>{
-//     const header = document.getElementById('header')
-//     // When the scroll is greater than 50 viewport height, add the shadow-header class to the header tag
-//     this.scrollY >= 50 ? header.classList.add('shadow-header') 
-//                        : header.classList.remove('shadow-header')
-// }
-// window.addEventListener('scroll', shadowHeader)
 
-/*firebase*/
-document.write('<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>');
-document.write('<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBeVtV82aC4I-9z6oe6KAc14qHngKgwdTU",
@@ -50,38 +42,46 @@ const firebaseConfig = {
     appId: "1:769294286590:web:62a7f643b47333fa5aafaf",
     measurementId: "G-PCPHRRTR5C"
   };
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-function attachFormSubmission() {
-    const contactForm = document.getElementById('contactForm');
-    const submittedPage = document.getElementById('submitted-page');
+  
+let app=initializeApp(firebaseConfig);
 
-    contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
 
-        // Assuming a simple validation for name and email
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
+const data= getFirestore(app);
 
-        if (name.trim() === '' || email.trim() === '') {
-            alert('Please fill in all the details.');
-            return;
-        }
 
-        // Save data to Firebase
-        saveDataToFirebase(name, email);
 
-    });
-}
+
+const contactForm = document.getElementById('contact-form');
+const submittedPage = document.getElementById('submitted-page');
+
+contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Assuming a simple validation for name and email
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+
+    if (name.trim() === '' || email.trim() === '') {
+        alert('Please fill in all the details.');
+        return;
+    }
+
+    // Save data to Firebase
+    saveDataToFirebase(name, email);
+
+});
+
 
 // Save data to Firebase
 function saveDataToFirebase(name, email) {
-    const dataRef = database.ref('submissions'); // 'submissions' is the name of your Firebase collection
 
     // Push the data to Firebase
-    dataRef.push({
+    addDoc( collection(data,'submissions'),{
         name: name,
         email: email,
-        timestamp: firebase.database.ServerValue.TIMESTAMP
+        timestamp: new Date().toTimeString()
     });
 }
+
+
+

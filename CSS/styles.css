@@ -1,6 +1,11 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap");
 
+.nav__list{
+    display: none;
+    
+}
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3.5rem;
@@ -218,6 +223,13 @@ img {
         backdrop-filter: blur(8px);
         transition: top .4s;
     }
+
+    .nav__list{
+        display: grid;
+        flex-direction: column;
+        row-gap: 2.5rem;
+    }
+    
 }
 
 .nav__title,
@@ -231,6 +243,7 @@ img {
     font-size: var(--small-font-size);
     font-weight: var(--font-semi-bold);
     margin-bottom: 3.5rem;
+    
 }
 
 .nav__name{
@@ -238,6 +251,7 @@ img {
     width: max-content;
     margin: 0 auto 3rem;
     font-size: var(--h2-font-size);
+    display: none;
 }
 
 .nav__name::after,
@@ -257,18 +271,18 @@ img {
 
 }
 
-.nav__list{
+/* .nav__list{
     display: grid;
     flex-direction: column;
     row-gap: 2.5rem;
-}
+} */
 
 .nav__link{
     position: relative;
     color: var(--text-color-light);
     font-size: var(--h3-font-size);
     font-weight: var(--font-semi-bold);
-    transition: color 3s;
+    transition: color .3s;
 }
 
 .nav__link::after{
@@ -278,8 +292,8 @@ img {
     background-color: var(--white-color);
     position: absolute;
     left: 0;
-    bottom: -5rem;
-    transition:width .3s;
+    bottom: -.5rem;
+    transition: width .3s;
 }
 
 .nav__link:hover{
@@ -288,15 +302,16 @@ img {
 .nav__link:hover::after{
     width: 25%;
 }
- .nav__close{
+.nav__close{
     position: absolute;
     font-size: 1.5rem;
     top: 1rem;
     right: 1.5rem;
     cursor: pointer;
- }
+
+}
 /* Show menu */
-show-menu{
+.show-menu{
     top: 0;
 }
 
@@ -416,84 +431,9 @@ show-menu{
     hsla(14,98%,50%, 0));;
 }
 
-.home__scroll{
-    display: block;
-    width:max-content;
-    margin: 0 auto;
-}
 
-.home__scroll-text{
-    display: none;
-}
 
-.home__scroll-box{
-    background-color: var(--black-color);
-    color: var(--white-color);
-    width: 36px;
-    height: 36px;
-    display: grid;
-    place-items: center;
-    transition: background-color .4s;
-}
 
-.home__scroll-box i{
-    animation: scroll-down 3s infinite;
-}
-/* Animate scroll icon */
-@keyframes scroll-down {
-    0%{
-        transform: translateY(-1rem);
-        opacity: 0;
-    }
-    50%{
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100%{
-        transform: translateY(.6rem);
-        opacity: 0;
-    }
-    
-}
-
-/*=============== BUTTON ===============*/
-.button,
-.button__ghost{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: .5rem;
-}
-
-.button{
-    background-color: var(--black-color);
-    padding: 1.1rem 1.5rem;
-    color: var(--white-color);
-    font-weight: var(--font-medium);
-    transition: background-color .4s;
-}
-
-.button i{
-    font-size: 1.2rem;
-}
-
-.button:hover{
-    background-color: var(--first-color);
-}
-
-.button__ghost{
-    border: 3px solid var(--black-color);
-    color: var(--black-color);
-    padding: .5rem;
-    transition: border .4s, color .4s;
-}
-.button__ghost i{
-    font-size: 1.25rem;
-}
-
-.button__ghost:hover{
-    border: 3px solid var(--first-color);
-}
 /*=============== ABOUT ===============*/
 .about{
     background-color: var(--container-color);
@@ -589,19 +529,19 @@ show-menu{
     align-items: center;
     column-gap: 1rem;
 }
-/*=============== SERVICES ===============*/
-.services__container{
+/*=============== skills ===============*/
+.skills__container{
     grid-template-columns: 250px;
     justify-content: center;
     row-gap: 2rem;
     padding-top: 1rem;
 }
 
-.services__card{
+.skills__card{
     position: relative;
 }
 
-.services__content{
+.skills__content{
     height: 100%;
     background-color: var(--body-color);
     border: 4px solid var(--black-color);
@@ -611,7 +551,7 @@ show-menu{
     transition: background-color .4s, border 4s;
 }
 
-.services__border{
+.skills__border{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -621,21 +561,21 @@ show-menu{
     transition: transform 4s;
 }
 
-.services__card:hover .services__border{
+.skills__card:hover .skills__border{
     transform: translate(.75rem, .75rem);
 }
 
-.services__icon{
+.skills__icon{
     position: relative;
     display: inline-block;
 }
-.services__icon i{
+.skills__icon i{
     font-size: 2rem;
     color: var(--black-color);
     position: relative;
     z-index: 5;
 }
-.services__box{
+.skills__box{
     position: absolute;
     width: 24px;
     height: 24px;
@@ -644,7 +584,7 @@ show-menu{
     top: -2px;
 }
 
-.services__title{
+.skills__title{
     font-size: var(--h2-font-size);
     margin-bottom: 1.25rem;
 }
@@ -755,17 +695,8 @@ show-menu{
     cursor: pointer;
 }
 
-/* Opaque placeholder */
-.contact__input:focus::placeholder{
-    opacity: 0;
-}
 
-/* Move label up & sticky label */
-.contact__input:focus + .contact__label,
-.contact__input:not(:placeholder-shown).contact__input:not(focus)+ .contact__label{
-    opacity: 1;
-    top: -16px;
-}
+
 
 /*=============== FOOTER ===============*/
 .footer__copy{
@@ -832,10 +763,16 @@ show-menu{
 }
 
 @media screen and(min-width: 768px) {
-    .services__container{
+    .skills__container{
         grid-template-columns: repeat(2,350px);
     }
     
+    .nav__list{
+        display: grid;
+        flex-direction: row;
+        column-gap: 4rem;
+
+    }
     
 }
 
@@ -869,6 +806,7 @@ show-menu{
     }
 
     .nav__list{
+        display: grid;
         flex-direction: row;
         column-gap: 4rem;
 
@@ -1021,34 +959,28 @@ show-menu{
     .about__buttons{
         justify-items: initial;
     }
-    .button__ghost{
-        padding:  .75rem;
-    }
-    .button__ghost i{
-        font-size: 1.5rem;
-    }
-    .services__container{
+    .skills__container{
         grid-template-columns: repeat(3, 282px);
         column-gap: 5rem;
         padding-block: 3rem 5rem;
     }
-    .services__content{
+    .skills__content{
         padding: 6.5rem 1.5rem 3.5rem;
         border: 6px solid var(--black-color);
     }
 
-    .services__icon i{
+    .skills__icon i{
         font-size: 3rem;
     
     }
-    .services__box{
+    .skills__box{
         width: 32px;
         height: 32px;
     }
-    .services__title{
+    .skills__title{
         margin-bottom: 1.5rem;
     }
-    .services__card:hover .services__border{
+    .skills__card:hover .skills__border{
         transform: translate(1.25rem, 1.25rem);
     }
     .contact__container{
@@ -1076,9 +1008,6 @@ show-menu{
         margin-top: 1.25rem;
         width: max-content;
     }
-     
-    
+      
 
 }
-
-
